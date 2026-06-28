@@ -100,7 +100,14 @@ noBtn.addEventListener("touchstart", event => {
   moveNoButton();
 });
 
-noBtn.addEventListener("click", () => goTo("page-no"));
+noBtn.addEventListener("click", event => {
+  event.preventDefault();
+  moveNoButton();
+
+  if (noMoves >= 7) {
+    noBtn.textContent = "the yes button is right there 😭";
+  }
+});
 
 yesBtn.addEventListener("click", () => {
   vibrate([20, 35, 20]);
