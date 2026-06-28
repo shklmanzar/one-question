@@ -1,0 +1,29 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--pink:#ff74aa;--orange:#ffb86c;--glass:rgba(255,255,255,.09);--border:rgba(255,255,255,.15)}
+body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#2d1b36 0%,#111 45%,#050505 100%);color:white;display:grid;place-items:center;padding:24px;overflow:hidden;transition:background 900ms ease}
+body.warm{background:radial-gradient(circle at top,#5a2639 0%,#2a171c 45%,#070505 100%)}
+.app{width:min(92vw,460px)}
+.card{display:none;text-align:center;background:var(--glass);border:1px solid var(--border);border-radius:28px;padding:34px 24px;backdrop-filter:blur(14px);box-shadow:0 24px 80px rgba(0,0,0,.35);animation:cardIn 360ms ease both}
+.card.active{display:block}
+.card.celebrate{animation:celebrate 700ms ease both}
+.eyebrow{text-transform:lowercase;color:#ffd6e7;letter-spacing:.12em;font-size:.78rem;margin:0 0 10px}
+h1{font-size:clamp(2rem,8vw,3rem);line-height:1.05;margin:0 0 22px}
+p{font-size:1.05rem;line-height:1.6}
+.buttons{position:relative;min-height:105px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
+button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:1rem;cursor:pointer;transition:transform 180ms ease,box-shadow 180ms ease,opacity 180ms ease}
+button:active{transform:scale(.96)}
+.primary{background:linear-gradient(135deg,var(--pink),var(--orange));color:#161616;box-shadow:0 12px 30px rgba(255,116,170,.25)}
+.secondary{background:rgba(255,255,255,.16);color:white;border:1px solid rgba(255,255,255,.22)}
+.yes{min-width:98px}.yes.pulse{animation:yesPulse 520ms ease}.no{position:relative}
+.hint,.small{color:rgba(255,255,255,.72);font-size:.92rem}.mission h1{margin-bottom:28px}
+label{display:block;text-align:left;margin:16px 0 8px;color:#ffd6e7;font-size:.9rem}
+input{width:100%;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:white;font-size:1rem}
+input::-webkit-calendar-picker-indicator{filter:invert(1)}
+.error{min-height:24px;color:#ffb6c8;font-size:.9rem}
+.loading-bar{width:100%;height:16px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;margin:26px 0 10px}
+#loadingFill{width:0%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--orange));transition:width 620ms ease}
+.final strong{color:#ffd6e7}#confetti{position:fixed;inset:0;pointer-events:none;z-index:5}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes celebrate{0%{transform:scale(1)}45%{transform:scale(1.045)}100%{transform:scale(1)}}
+@keyframes yesPulse{0%{transform:scale(1)}50%{transform:scale(1.22);box-shadow:0 0 0 14px rgba(255,116,170,.18)}100%{transform:scale(1)}}
+@media (min-width:760px){.app{width:min(520px,88vw)}.card{padding:44px 34px}}

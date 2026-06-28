@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Question</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <main class="app">
+    <section class="card active" id="page-intro">
+      <p class="eyebrow">hey bel</p>
+      <h1>I have one question...</h1>
+      <button class="primary" onclick="goTo('page-question')">Continue</button>
+    </section>
+
+    <section class="card" id="page-question">
+      <p class="eyebrow">okay so...</p>
+      <h1>Will you go on a date with me?</h1>
+      <div class="buttons">
+        <button class="primary yes" id="yesBtn">Yes</button>
+        <button class="secondary no" id="noBtn">No</button>
+      </div>
+      <p class="hint">choose wisely 🙂</p>
+    </section>
+
+    <section class="card" id="page-no">
+      <h1>😂 Nice try.</h1>
+      <p>We already agreed we would give this an honest shot.</p>
+      <button class="primary" onclick="goTo('page-date')">Okay okay</button>
+    </section>
+
+    <section class="card mission" id="page-mission">
+      <h1>Mission accepted.</h1>
+      <button class="primary" onclick="goTo('page-date')">Continue</button>
+    </section>
+
+    <section class="card" id="page-date">
+      <p class="eyebrow">now the important part</p>
+      <h1>Pick a day you're free</h1>
+      <label for="date">Date</label>
+      <input type="date" id="date" />
+      <label for="time">Time</label>
+      <input type="time" id="time" />
+      <button class="primary lock" id="lockBtn" onclick="lockDate()">Lock it in 🔒</button>
+      <p class="error" id="error"></p>
+    </section>
+
+    <section class="card loading-card" id="page-loading">
+      <p class="eyebrow">standby...</p>
+      <h1 id="loadingText">Dispatch received...</h1>
+      <div class="loading-bar"><div id="loadingFill"></div></div>
+      <p class="hint" id="loadingSub">Preparing operation.</p>
+    </section>
+
+    <section class="card final" id="page-final">
+      <h1>Perfect 😊</h1>
+      <p id="finalText"></p>
+      <p class="small">I'll see you soon ❤️</p>
+      <p class="small">P.S. Hopefully Singapore traffic behaves this time 😂</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
