@@ -162,10 +162,28 @@ function lockDate() {
   lockBtn.disabled = true;
   lockBtn.style.opacity = "0.85";
 
-  setTimeout(() => {
-    goTo("page-loading");
-    runLoading();
-  }, 900);
+  setTimeout(async () => {
+  await sendTelegramNotification();
+  goTo("page-loading");
+  runLoading();
+}, 900);
+}
+
+async function sendTelegramNotification() {
+  try {
+    await fetch("/api/telegram", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        date: chosenDateText,
+        time: chosenTimeText
+      })
+    });
+  } catch (error) {
+    console.error("Telegram notification failed:", error);
+  }
 }
 
 const loadingSteps = [
