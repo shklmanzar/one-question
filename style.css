@@ -2,7 +2,7 @@
 :root{--pink:#ff74aa;--orange:#ffb86c;--glass:rgba(255,255,255,.09);--border:rgba(255,255,255,.15)}
 body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#2d1b36 0%,#111 45%,#050505 100%);color:white;display:grid;place-items:center;padding:24px;overflow:hidden;transition:background 900ms ease}
 body.warm{background:radial-gradient(circle at top,#5a2639 0%,#2a171c 45%,#070505 100%)}
-.app{width:min(92vw,460px)}
+.app{     width:100%;     max-width:440px; }
 .card{display:none;text-align:center;background:var(--glass);border:1px solid var(--border);border-radius:28px;padding:34px 24px;backdrop-filter:blur(14px);box-shadow:0 24px 80px rgba(0,0,0,.35);animation:cardIn 360ms ease both}
 .card.active{display:block}
 .card.celebrate{animation:celebrate 700ms ease both}
@@ -26,4 +26,5 @@ input::-webkit-calendar-picker-indicator{filter:invert(1)}
 @keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes celebrate{0%{transform:scale(1)}45%{transform:scale(1.045)}100%{transform:scale(1)}}
 @keyframes yesPulse{0%{transform:scale(1)}50%{transform:scale(1.22);box-shadow:0 0 0 14px rgba(255,116,170,.18)}100%{transform:scale(1)}}
+@media (max-width:480px){body{padding:18px;}h1{font-size:2.55rem;}.card{padding:30px 20px;}button{width:100%;}}
 @media (min-width:760px){.app{width:min(520px,88vw)}.card{padding:44px 34px}}
