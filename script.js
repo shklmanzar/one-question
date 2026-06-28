@@ -47,18 +47,35 @@ function celebrateCurrentCard() {
 }
 
 function moveNoButton() {
+  const texts = [
+    "No",
+    "No....",
+    "really?",
+    "Oh come on...",
+    "you sure?",
+    "still no?....damn",
+    "access denied🚫"
+  ];
+
+  if (noMoves >= 6) {
+    noBtn.textContent = texts[6];
+    noBtn.style.transform = noBtn.style.transform;
+    return;
+  }
+
   noMoves++;
+
+  noBtn.textContent = texts[Math.min(noMoves, 6)];
 
   const x = Math.random() * 200 - 100;
   const y = Math.random() * 130 - 65;
   const rotate = Math.random() * 24 - 12;
 
-  noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+  noBtn.style.transform =
+    `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
 
-  const scale = Math.min(1 + noMoves * 0.18, 2.25);
+  const scale = Math.min(1 + noMoves * 0.2, 2.2);
   yesBtn.style.transform = `scale(${scale})`;
-
-  if (noMoves >= 5) noBtn.textContent = "still no? 😭";
 }
 
 function todayISO() {
@@ -102,11 +119,12 @@ noBtn.addEventListener("touchstart", event => {
 
 noBtn.addEventListener("click", event => {
   event.preventDefault();
-  moveNoButton();
 
-  if (noMoves >= 7) {
-    noBtn.textContent = "the yes button is right there 😭";
+  if (noMoves >= 6) {
+    return;
   }
+
+  moveNoButton();
 });
 
 yesBtn.addEventListener("click", () => {
