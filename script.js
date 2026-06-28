@@ -107,7 +107,7 @@ yesBtn.addEventListener("click", () => {
   document.body.classList.add("warm");
   yesBtn.classList.add("pulse");
   celebrateCurrentCard();
-  burstConfetti();
+  burstPetals();
 
   setTimeout(() => {
     yesBtn.classList.remove("pulse");
@@ -149,7 +149,7 @@ function lockDate() {
   });
 
   vibrate([25, 45, 25]);
-  burstConfetti();
+  burstPetals();
 
   lockBtn.textContent = "Date secured.";
   lockBtn.disabled = true;
@@ -202,7 +202,7 @@ function showFinal() {
     `Be ready on <strong>${chosenDateText}</strong> at <strong>${chosenTimeText}</strong>.<br><br><strong>I'll come pick you up.</strong>`;
 
   playDing();
-  burstConfetti();
+  burstPetals();
   goTo("page-final");
 }
 
@@ -229,47 +229,58 @@ function playDing() {
   } catch (error) {}
 }
 
-function burstConfetti() {
+function burstPetals() {
   const canvas = document.getElementById("confetti");
   const context = canvas.getContext("2d");
-  const particles = [];
+  const petals = [];
 
   canvas.width = innerWidth;
   canvas.height = innerHeight;
 
-  for (let i = 0; i < 150; i++) {
-    particles.push({
+  for (let i = 0; i < 70; i++) {
+    petals.push({
       x: canvas.width / 2,
       y: canvas.height / 2,
-      vx: (Math.random() - 0.5) * 11,
-      vy: (Math.random() - 0.5) * 11 - 3,
-      size: Math.random() * 6 + 3,
-      life: 95,
-      hue: Math.random() * 360,
-      rot: Math.random() * 360,
-      spin: Math.random() * 12 - 6
+      vx: (Math.random() - 0.5) * 5,
+      vy: Math.random() * -4 - 1,
+      size: Math.random() * 9 + 7,
+      life: 120,
+      rotate: Math.random() * 360,
+      spin: Math.random() * 4 - 2,
+      opacity: Math.random() * 0.35 + 0.55
     });
+  }
+
+  function drawPetal(petal) {
+    context.save();
+    context.translate(petal.x, petal.y);
+    context.rotate((petal.rotate * Math.PI) / 180);
+    context.globalAlpha = petal.opacity;
+
+    context.fillStyle = "#ffd1dc";
+    context.beginPath();
+    context.ellipse(0, 0, petal.size * 0.55, petal.size, 0, 0, Math.PI * 2);
+    context.fill();
+
+    context.restore();
   }
 
   function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(particle => {
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-      particle.vy += 0.13;
-      particle.life--;
-      particle.rot += particle.spin;
+    petals.forEach(petal => {
+      petal.x += petal.vx;
+      petal.y += petal.vy;
+      petal.vy += 0.055;
+      petal.vx += Math.sin(petal.life * 0.05) * 0.025;
+      petal.rotate += petal.spin;
+      petal.life--;
+      petal.opacity *= 0.992;
 
-      context.save();
-      context.translate(particle.x, particle.y);
-      context.rotate((particle.rot * Math.PI) / 180);
-      context.fillStyle = `hsl(${particle.hue}, 90%, 65%)`;
-      context.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
-      context.restore();
+      drawPetal(petal);
     });
 
-    if (particles.some(particle => particle.life > 0)) {
+    if (petals.some(petal => petal.life > 0)) {
       requestAnimationFrame(animate);
     } else {
       context.clearRect(0, 0, canvas.width, canvas.height);
