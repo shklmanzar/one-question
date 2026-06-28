@@ -176,7 +176,7 @@ function lockDate() {
   vibrate([25, 45, 25]);
   burstPetals();
 
-  lockBtn.textContent = "Date secured.";
+  lockBtn.textContent = "✓ Date secured.";
   lockBtn.disabled = true;
   lockBtn.style.opacity = "0.85";
 
